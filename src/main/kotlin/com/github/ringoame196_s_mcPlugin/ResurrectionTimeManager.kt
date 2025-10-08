@@ -13,7 +13,8 @@ object ResurrectionTimeManager {
 
         for ((k, v) in fileData) {
             val blockType = Material.getMaterial(k.uppercase()) ?: continue
-            val time = v.toIntOrNull() ?: continue
+            val time = v ?: continue
+            if (time !is Int) continue
             resurrectionTimeData[blockType] = time
         }
     }
