@@ -30,6 +30,7 @@ configurations["implementation"].extendsFrom(shadowImplementation)
 dependencies {
     shadowImplementation(kotlin("stdlib"))
     compileOnly("org.spigotmc:spigot-api:$pluginVersion-R0.1-SNAPSHOT")
+    implementation("org.yaml:snakeyaml:2.2") // yamlファイル読み込み用
 }
 
 configure<BukkitPluginDescription> {
