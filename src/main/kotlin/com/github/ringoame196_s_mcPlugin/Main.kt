@@ -9,7 +9,7 @@ class Main : JavaPlugin() {
     override fun onEnable() {
         super.onEnable()
         server.pluginManager.registerEvents(Events(), plugin)
-        // val command = getCommand("command")
-        // command!!.setExecutor(Command())
+        val command = getCommand("reore")
+        command!!.setExecutor(Command())
     }
 }
