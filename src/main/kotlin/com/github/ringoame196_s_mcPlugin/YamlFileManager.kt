@@ -4,9 +4,9 @@ import org.yaml.snakeyaml.Yaml
 import java.io.File
 
 class YamlFileManager {
-	fun loadYAsMap(file: File): Map<String, String> {
-		val yaml = Yaml()
-		val inputStream = file.inputStream()
-		return yaml.load(inputStream) as Map<String, String>
-	}
+    fun loadYAsMap(file: File): Map<String, String> {
+        val yaml = Yaml()
+        val inputStream = file.inputStream()
+        return yaml.load(inputStream) as Map<String, String>
+    }
 }
