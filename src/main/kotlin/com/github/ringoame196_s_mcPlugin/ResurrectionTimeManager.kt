@@ -12,7 +12,7 @@ object ResurrectionTimeManager {
         val fileData = yamlFileManager.loadYAsMap(file)
 
         for ((k, v) in fileData) {
-            val blockType = Material.getMaterial(k) ?: continue
+            val blockType = Material.getMaterial(k.uppercase()) ?: continue
             val time = v.toIntOrNull() ?: continue
             resurrectionTimeData[blockType] = time
         }
