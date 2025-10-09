@@ -10,11 +10,16 @@ class Main : JavaPlugin() {
     override fun onEnable() {
         super.onEnable()
 
+        // 設定ファイル読み込み
         saveResource("resurrection_time_data.yml", false)
         val resurrectionTimeDataFile = File(plugin.dataFolder, "resurrection_time_data.yml")
         ResurrectionTimeManager.load(resurrectionTimeDataFile)
 
-        server.pluginManager.registerEvents(BlockBreakEvent(), plugin)
+        // スケジュール関係
+        RevivalDatabaseManager.dbPath = "${plugin.dataFolder}/data.db"
+        RevivalDatabaseManager.load()
+
+        server.pluginManager.registerEvents(BlockBreakEvent(plugin), plugin)
 
         val command = getCommand("reore")
         command!!.setExecutor(Command())
