@@ -4,13 +4,12 @@ import com.github.ringoame196_s_mcPlugin.ResurrectionTimeManager
 import com.github.ringoame196_s_mcPlugin.RevivalData
 import com.github.ringoame196_s_mcPlugin.RevivalManager
 import org.bukkit.GameMode
-import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
+import org.bukkit.plugin.Plugin
 
-class BlockBreakEvent : Listener {
-    val breakBlockBlock = Material.BEDROCK
+class BlockBreakEvent(private val plugin: Plugin) : Listener {
 
     @EventHandler
     fun onBlockBreak(e: BlockBreakEvent) {
@@ -22,11 +21,10 @@ class BlockBreakEvent : Listener {
 
         // 復活時間が設定されていなければ終了
         val resurrectionTime = ResurrectionTimeManager.getResurrectionTime(block.type) ?: return
-        block.type = breakBlockBlock
         val revivalData = RevivalData(
             block.type,
             location
         )
-        RevivalManager.add(revivalData, resurrectionTime)
+        RevivalManager.add(revivalData, resurrectionTime, plugin)
     }
 }
