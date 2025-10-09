@@ -6,16 +6,16 @@ import org.bukkit.plugin.Plugin
 object RevivalSchedule {
     private val taskList = mutableListOf<RevivalData>()
 
-    fun addTask(revivalData: RevivalData, resurrectionTime: Int, plugin: Plugin) {
-        if (taskList.contains(revivalData)) return
-        taskList.add(revivalData)
+    fun addTask(data: RevivalData, time: Int, plugin: Plugin) {
+        if (taskList.contains(data)) return
+        taskList.add(data)
         Bukkit.getScheduler().runTaskLater(
             plugin,
             Runnable { // 実行したいコードをここに書く
-                RevivalManager.resurrectionBlock(revivalData)
-                taskList.remove(revivalData)
+                RevivalManager.resurrectionBlock(data)
+                taskList.remove(data)
             },
-            (resurrectionTime * 20).toLong()
+            (time * 20).toLong()
         ) // 20Lは1秒を表す（1秒 = 20ticks）
     }
 }

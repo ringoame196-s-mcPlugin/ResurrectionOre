@@ -7,28 +7,28 @@ import org.bukkit.plugin.Plugin
 object RevivalManager {
     val breakBlockBlock = Material.BEDROCK
 
-    fun add(revivalData: RevivalData, resurrectionTime: Int, plugin: Plugin) {
-        RevivalSchedule.addTask(revivalData, resurrectionTime, plugin)
-        RevivalDatabaseManager.save(revivalData, resurrectionTime) // db保存
+    fun add(data: RevivalData, time: Int, plugin: Plugin) {
+        RevivalSchedule.addTask(data, time, plugin)
+        RevivalDatabaseManager.save(data, time) // db保存
 
         // 1tick後に置き換え
         Bukkit.getScheduler().runTask(
             plugin,
             Runnable {
-                setBreakBlock(revivalData)
+                setBreakBlock(data)
             }
         )
     }
 
-    fun setBreakBlock(revivalData: RevivalData) {
-        val location = revivalData.location
+    fun setBreakBlock(data: RevivalData) {
+        val location = data.location
         location.block.type = breakBlockBlock
     }
 
-    fun resurrectionBlock(revivalData: RevivalData) {
-        val location = revivalData.location
-        val blockType = revivalData.blockType
+    fun resurrectionBlock(data: RevivalData) {
+        val location = data.location
+        val blockType = data.blockType
         location.block.type = blockType
-        RevivalDatabaseManager.delete(revivalData)
+        RevivalDatabaseManager.delete(data)
     }
 }
