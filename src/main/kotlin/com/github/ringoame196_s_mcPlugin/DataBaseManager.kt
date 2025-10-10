@@ -26,6 +26,36 @@ class DataBaseManager(private val dbFilePath: String) {
         }
     }
 
+    fun bulkInsert(
+        table: String,
+        columns: List<String>,
+        dataList: List<List<Any>>
+    ) {
+        if (dataList.isEmpty()) return
+
+        val placeholders = columns.joinToString(",") { "?" }
+        val sql = "INSERT OR REPLACE INTO $table (${columns.joinToString(",")}) VALUES ($placeholders);"
+
+        try {
+            connection.use { conn ->
+                conn.autoCommit = false
+                conn.prepareStatement(sql).use { preparedStatement ->
+                    for (params in dataList) {
+                        params.forEachIndexed { index, value ->
+                            preparedStatement.setObject(index + 1, value)
+                        }
+                        preparedStatement.addBatch()
+                    }
+                    preparedStatement.executeBatch()
+                }
+                conn.commit()
+            }
+        } catch (e: SQLException) {
+            Bukkit.getLogger().warning("SQL bulk insert error: ${e.message}")
+            throw e
+        }
+    }
+
     /**
      * 単一の値を取得する
      * @param sql 実行するSQL文

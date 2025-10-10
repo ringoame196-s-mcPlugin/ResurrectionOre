@@ -27,8 +27,9 @@ class BlockBreakEvent(private val plugin: Plugin) : Listener {
         val resurrectionTime = ResurrectionTimeManager.getResurrectionTime(block.type) ?: return
         val revivalData = RevivalData(
             block.type,
-            location
+            location,
+            resurrectionTime
         )
-        RevivalManager.add(revivalData, resurrectionTime, plugin)
+        RevivalManager.add(revivalData, plugin)
     }
 }
