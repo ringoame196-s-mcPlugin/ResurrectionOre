@@ -8,8 +8,9 @@ import org.bukkit.scheduler.BukkitTask
 object RevivalSchedule {
     private val taskList = mutableMapOf<Location, BukkitTask>()
 
-    fun addTask(data: RevivalData, time: Int, plugin: Plugin) {
+    fun addTask(data: RevivalData, plugin: Plugin) {
         val location = data.location
+        val time = data.revivalTime
         if (taskList.contains(location)) return
         val task = Bukkit.getScheduler().runTaskLater(
             plugin,

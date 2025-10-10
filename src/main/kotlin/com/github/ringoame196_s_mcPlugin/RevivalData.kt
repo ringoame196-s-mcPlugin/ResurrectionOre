@@ -5,5 +5,6 @@ import org.bukkit.Material
 
 data class RevivalData(
     val blockType: Material,
-    val location: Location
+    val location: Location,
+    val revivalTime: Int
 )
