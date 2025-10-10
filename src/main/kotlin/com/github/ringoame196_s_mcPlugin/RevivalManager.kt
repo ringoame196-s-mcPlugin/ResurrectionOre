@@ -7,9 +7,9 @@ import org.bukkit.plugin.Plugin
 object RevivalManager {
     val breakBlockBlock = Material.BEDROCK
 
-    fun add(data: RevivalData, time: Int, plugin: Plugin) {
-        RevivalSchedule.addTask(data, time, plugin)
-        RevivalDatabaseManager.save(data, time) // db保存
+    fun add(data: RevivalData, plugin: Plugin) {
+        RevivalSchedule.addTask(data, plugin)
+        RevivalDatabaseManager.saveDB(data) // db保存
 
         // 1tick後に置き換え
         Bukkit.getScheduler().runTask(
@@ -29,6 +29,9 @@ object RevivalManager {
         val location = data.location
         val blockType = data.blockType
         location.block.type = blockType
-        RevivalDatabaseManager.delete(data)
+
+        // DB関係
+        RevivalDatabaseManager.deleteCache(data)
+        RevivalDatabaseManager.deleteDB(data)
     }
 }
