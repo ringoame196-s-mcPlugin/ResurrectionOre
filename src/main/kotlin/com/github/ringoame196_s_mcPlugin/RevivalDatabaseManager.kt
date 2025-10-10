@@ -20,17 +20,7 @@ object RevivalDatabaseManager {
     fun flushToDatabase() {
         if (!::dataBaseManager.isInitialized) return
         if (cache.isEmpty()) return
-        val dataList = cache.map {
-            val resurrectionAt = System.currentTimeMillis() + (it.revivalTime * 1000) // 秒 → ミリ秒
-            listOf(
-                it.location.world?.name as Any,
-                it.location.blockX as Any,
-                it.location.blockY as Any,
-                it.location.blockZ as Any,
-                it.blockType.name as Any, // Material を文字列で保存
-                resurrectionAt as Any // 復活予定時刻を保存
-            )
-        }
+        val dataList = cache.map { it.toDBParams() }
 
         dataBaseManager.bulkInsert(
             TABLE,
@@ -40,21 +30,12 @@ object RevivalDatabaseManager {
     }
 
     fun deleteDB(revivalData: RevivalData) {
-        val location = revivalData.location
-        val world = location.world?.name ?: return
-        val x = location.x
-        val y = location.y
-        val z = location.z
         val sql = "DELETE FROM $TABLE WHERE $WORLD_KEY = ? AND $X_KEY = ? AND $Y_KEY = ? AND $Z_KEY = ?;"
+        val params = revivalData.toDeleteParams()
 
         dataBaseManager.executeUpdate(
             sql,
-            listOf(
-                world,
-                x,
-                y,
-                z
-            )
+            params
         )
     }
 
