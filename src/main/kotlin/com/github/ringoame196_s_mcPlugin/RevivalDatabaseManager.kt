@@ -27,6 +27,7 @@ object RevivalDatabaseManager {
             listOf(WORLD_KEY, X_KEY, Y_KEY, Z_KEY, BLOCK_TYPE_KEY, RESURRECTION_AT_KEY),
             dataList
         )
+        cache.clear()
     }
 
     fun deleteDB(revivalData: RevivalData) {
