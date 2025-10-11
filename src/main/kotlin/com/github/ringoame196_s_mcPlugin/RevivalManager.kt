@@ -5,7 +5,7 @@ import org.bukkit.Material
 import org.bukkit.plugin.Plugin
 
 object RevivalManager {
-    val breakBlockBlock = Material.BEDROCK
+    val BREAK_BLOCK_TYPE = Material.BEDROCK
 
     fun add(data: RevivalData, plugin: Plugin) {
         RevivalSchedule.addTask(data, plugin)
@@ -22,7 +22,7 @@ object RevivalManager {
 
     fun setBreakBlock(data: RevivalData) {
         val location = data.location
-        location.block.type = breakBlockBlock
+        location.block.type = BREAK_BLOCK_TYPE
     }
 
     fun resurrectionBlock(data: RevivalData) {

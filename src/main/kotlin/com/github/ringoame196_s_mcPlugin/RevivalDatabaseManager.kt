@@ -67,7 +67,7 @@ object RevivalDatabaseManager {
         for (data in dbDataList) {
             val revivalData = conversionRevivalData(data) ?: continue
             if (revivalData.revivalTime > 0) {
-                RevivalManager.add(revivalData,plugin)
+                RevivalManager.add(revivalData, plugin)
             } else {
                 RevivalManager.resurrectionBlock(revivalData)
             }
