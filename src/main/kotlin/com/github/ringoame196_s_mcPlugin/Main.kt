@@ -23,15 +23,15 @@ class Main : JavaPlugin() {
         saveResource("data.db", false)
         val dbPath = "${plugin.dataFolder}/data.db"
         RevivalDatabaseManager.dataBaseManager = DataBaseManager(dbPath)
-        RevivalDatabaseManager.load()
+        RevivalDatabaseManager.load(plugin)
 
         task = Bukkit.getScheduler().runTaskTimer(
             plugin,
             Runnable {
                 RevivalDatabaseManager.flushToDatabase()
             },
-            0L, 20L * 10L
-        ) // 10秒ごとにDB保存
+            0L, 20L * 3L
+        ) // 3秒ごとにDB保存
 
         server.pluginManager.registerEvents(BlockBreakEvent(plugin), plugin)
 
@@ -41,6 +41,7 @@ class Main : JavaPlugin() {
 
     override fun onDisable() {
         super.onDisable()
+        RevivalDatabaseManager.flushToDatabase()
         task.cancel()
     }
 }
