@@ -105,8 +105,42 @@ class DataBaseManager(private val dbFilePath: String) {
         }
     }
 
+    fun acquisitionValuesList(
+        sql: String,
+        parameters: List<Any> = emptyList(),
+        keys: List<String>
+    ): List<Map<String, Any?>> {
+        try {
+            val results = mutableListOf<Map<String, Any?>>()
+
+            connection.use { conn ->
+                conn.prepareStatement(sql).use { preparedStatement ->
+                    parameters.bindParameters(preparedStatement)
+                    preparedStatement.executeQuery().use { resultSet ->
+                        while (resultSet.next()) {
+                            val row = mutableMapOf<String, Any?>()
+                            for (key in keys) {
+                                row[key] = try {
+                                    resultSet.getString(key)
+                                } catch (e: SQLException) {
+                                    null
+                                }
+                            }
+                            results.add(row)
+                        }
+                    }
+                }
+            }
+
+            return results
+        } catch (e: SQLException) {
+            Bukkit.getLogger().info("SQL Error: ${e.message}")
+            throw e
+        }
+    }
+
     // SQLiteコネクションの取得
-    private val connection: Connection
+    val connection: Connection
         get() = DriverManager.getConnection("jdbc:sqlite:$dbFilePath")
 
     // パラメータをPreparedStatementにバインドする拡張関数
