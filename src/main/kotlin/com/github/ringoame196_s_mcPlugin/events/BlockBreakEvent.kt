@@ -1,9 +1,9 @@
 package com.github.ringoame196_s_mcPlugin.events
 
-import com.github.ringoame196_s_mcPlugin.ResurrectionTimeManager
-import com.github.ringoame196_s_mcPlugin.RevivalData
-import com.github.ringoame196_s_mcPlugin.RevivalManager
-import com.github.ringoame196_s_mcPlugin.RevivalSchedule
+import com.github.ringoame196_s_mcPlugin.manager.ResurrectionTimeManager
+import com.github.ringoame196_s_mcPlugin.data.RevivalData
+import com.github.ringoame196_s_mcPlugin.manager.RevivalManager
+import com.github.ringoame196_s_mcPlugin.manager.RevivalSchedule
 import org.bukkit.GameMode
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener

@@ -1,4 +1,4 @@
-package com.github.ringoame196_s_mcPlugin
+package com.github.ringoame196_s_mcPlugin.database
 
 import org.bukkit.Bukkit
 import java.sql.Connection
