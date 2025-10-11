@@ -4,9 +4,9 @@ import org.bukkit.Location
 import org.bukkit.Material
 
 data class RevivalData(
-	val blockType: Material,
-	val location: Location,
-	val revivalTime: Int
+    val blockType: Material,
+    val location: Location,
+    val revivalTime: Int
 ) {
 
     /**
