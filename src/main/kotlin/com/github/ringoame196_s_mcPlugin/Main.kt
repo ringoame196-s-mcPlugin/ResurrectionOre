@@ -42,6 +42,6 @@ class Main : JavaPlugin() {
     override fun onDisable() {
         super.onDisable()
         RevivalDatabaseManager.flushToDatabase()
-        task.cancel()
+        if (::task.isInitialized) task.cancel()
     }
 }
