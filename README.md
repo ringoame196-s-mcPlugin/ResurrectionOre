@@ -1,5 +1,9 @@
 # ResurrectionOre
 
+
+https://github.com/user-attachments/assets/6a3e2361-118c-45e5-9a28-f92273b3d36d
+
+
 ## プラグイン説明
 - 鉱石を指定時間で復活させるプラグイン
 
