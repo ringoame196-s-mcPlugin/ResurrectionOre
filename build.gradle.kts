@@ -42,21 +42,6 @@ configure<BukkitPluginDescription> {
     apiVersion = "1." + pluginVersion.split(".")[1]
     author = "ringoame196_s_mcPlugin"
     website = "https://github.com/ringoame196-s-mcPlugin"
-
-    commands {
-        register("reore") {
-            description = "ResurrectionOre用コマンド"
-            permission = "resurrectionore.op"
-            usage = "/reore <reload>"
-        }
-    }
-
-    permissions {
-        register("resurrectionore.op") {
-            description = "ResurrectionOre用の管理者権限"
-            default = BukkitPluginDescription.Permission.Default.OP
-        }
-    }
 }
 
 tasks.withType<ShadowJar> {
