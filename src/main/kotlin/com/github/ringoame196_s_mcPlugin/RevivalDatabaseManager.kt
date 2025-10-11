@@ -1,6 +1,7 @@
 package com.github.ringoame196_s_mcPlugin
 
 import org.bukkit.Bukkit
+import org.bukkit.ChatColor
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.plugin.Plugin
@@ -51,6 +52,7 @@ object RevivalDatabaseManager {
 
     fun load(plugin: Plugin) {
         val sql = "SELECT * FROM $TABLE;"
+        var c = 0
         val dbDataList = dataBaseManager.acquisitionValuesList(
             sql,
             mutableListOf(),
@@ -68,9 +70,13 @@ object RevivalDatabaseManager {
             val revivalData = conversionRevivalData(data) ?: continue
             if (revivalData.revivalTime > 0) {
                 RevivalManager.add(revivalData, plugin)
+                c++
             } else {
                 RevivalManager.resurrectionBlock(revivalData)
             }
+        }
+        if (c > 0) {
+            Bukkit.broadcastMessage("${ChatColor.YELLOW}[${plugin.name}] ${c}件の鉱石の復活が再開されました")
         }
     }
 
