@@ -1,5 +1,7 @@
-package com.github.ringoame196_s_mcPlugin
+package com.github.ringoame196_s_mcPlugin.database
 
+import com.github.ringoame196_s_mcPlugin.data.RevivalData
+import com.github.ringoame196_s_mcPlugin.manager.RevivalManager
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Location

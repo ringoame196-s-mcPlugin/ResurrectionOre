@@ -1,5 +1,7 @@
-package com.github.ringoame196_s_mcPlugin
+package com.github.ringoame196_s_mcPlugin.manager
 
+import com.github.ringoame196_s_mcPlugin.data.RevivalData
+import com.github.ringoame196_s_mcPlugin.database.RevivalDatabaseManager
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.plugin.Plugin

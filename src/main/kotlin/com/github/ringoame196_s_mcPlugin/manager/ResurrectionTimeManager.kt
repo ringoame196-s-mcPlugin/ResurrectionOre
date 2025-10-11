@@ -1,7 +1,9 @@
-package com.github.ringoame196_s_mcPlugin
+package com.github.ringoame196_s_mcPlugin.manager
 
+import com.github.ringoame196_s_mcPlugin.utility.YamlFileManager
 import org.bukkit.Material
 import java.io.File
+import kotlin.collections.iterator
 
 object ResurrectionTimeManager {
     private val resurrectionTimeData = mutableMapOf<Material, Int>()

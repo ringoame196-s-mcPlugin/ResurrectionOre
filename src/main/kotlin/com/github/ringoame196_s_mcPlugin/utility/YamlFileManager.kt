@@ -1,4 +1,4 @@
-package com.github.ringoame196_s_mcPlugin
+package com.github.ringoame196_s_mcPlugin.utility
 
 import org.yaml.snakeyaml.Yaml
 import java.io.File

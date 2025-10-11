@@ -1,7 +1,10 @@
 package com.github.ringoame196_s_mcPlugin
 
 import com.github.ringoame196_s_mcPlugin.commands.Command
+import com.github.ringoame196_s_mcPlugin.database.DataBaseManager
+import com.github.ringoame196_s_mcPlugin.database.RevivalDatabaseManager
 import com.github.ringoame196_s_mcPlugin.events.BlockBreakEvent
+import com.github.ringoame196_s_mcPlugin.manager.ResurrectionTimeManager
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitTask
