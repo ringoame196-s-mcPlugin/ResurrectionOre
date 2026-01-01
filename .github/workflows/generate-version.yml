@@ -10,7 +10,9 @@ permissions:
   contents: write
 
 jobs:
-  generate-version:
+  jobs:
+    generate-version:
+      if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
 
     steps:
