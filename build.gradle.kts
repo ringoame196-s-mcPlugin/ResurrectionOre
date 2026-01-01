@@ -19,6 +19,7 @@ val pluginVersion: String by project
 
 // 表示用の最終バージョン
 val fullVersion = "$mcVersion-$pluginVersion"
+version = fullVersion
 
 repositories {
     mavenCentral()
