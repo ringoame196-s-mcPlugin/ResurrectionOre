@@ -7,14 +7,18 @@ on:
       - main
       - master
 
+permissions:
+  contents: write
+
 jobs:
   generate-version:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
-
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-java@v4
         with:
@@ -23,8 +27,8 @@ jobs:
 
       - name: Generate ver.txt
         run: |
-          VERSION=$(./gradlew -q printVersion)
-          echo "$VERSION" > ver.txt
+          VERSION=$(./gradlew -q printVersion | tail -n 1)
+          echo -n "$VERSION" > ver.txt
 
       - name: Commit ver.txt
         run: |
