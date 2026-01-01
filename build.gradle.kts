@@ -14,9 +14,11 @@ plugins {
     id("org.jmailen.kotlinter") version "3.8.0"
 }
 
-val gitVersion: Closure<String> by extra
+val mcVersion: String by project
+val pluginVersion: String by project
 
-val pluginVersion: String by project.ext
+// 表示用の最終バージョン
+val fullVersion = "$mcVersion-$pluginVersion"
 
 repositories {
     mavenCentral()
@@ -38,8 +40,8 @@ dependencies {
 
 configure<BukkitPluginDescription> {
     main = "com.github.ringoame196_s_mcPlugin.Main"
-    version = pluginVersion
-    apiVersion = "1." + pluginVersion.split(".")[1]
+    version = fullVersion
+    apiVersion = "1." + mcVersion.split(".")[1]
     author = "ringoame196_s_mcPlugin"
     website = "https://github.com/ringoame196-s-mcPlugin"
 }
@@ -66,7 +68,7 @@ tasks.named("build") {
         }
         doLast {
             val port = 25585
-            val ip = "192.168.0.21"
+            val ip = "ringoame-server"
             val apiUrl = "http://$ip:$port/plugin?name=${project.name}"
 
             try {
@@ -96,6 +98,12 @@ tasks.named("build") {
                 println("Warning: API通信で予期しないエラーが発生しました: ${e.message}")
             }
         }
+    }
+}
+
+tasks.named("printVersion") {
+    doLast {
+        println(fullVersion)
     }
 }
 
