@@ -33,7 +33,7 @@ val sqliteVersion = "3.46.1.0"
 
 dependencies {
     shadowImplementation(kotlin("stdlib"))
-    compileOnly("org.spigotmc:spigot-api:$pluginVersion-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:$mcVersion-R0.1-SNAPSHOT")
     implementation("org.yaml:snakeyaml:2.2") // yamlファイル読み込み用
     implementation("org.xerial:sqlite-jdbc:$sqliteVersion") // SQLLite
 }

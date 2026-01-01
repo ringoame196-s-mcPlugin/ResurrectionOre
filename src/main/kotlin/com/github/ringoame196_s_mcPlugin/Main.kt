@@ -36,6 +36,7 @@ class Main : JavaPlugin() {
         ) // 3秒ごとにDB保存
 
         server.pluginManager.registerEvents(BlockBreakEvent(plugin), plugin)
+        println("aaa")
     }
 
     override fun onDisable() {
