@@ -4,6 +4,8 @@ import com.github.ringoame196_s_mcPlugin.database.DataBaseManager
 import com.github.ringoame196_s_mcPlugin.database.RevivalDatabaseManager
 import com.github.ringoame196_s_mcPlugin.events.BlockBreakEvent
 import com.github.ringoame196_s_mcPlugin.manager.ResurrectionTimeManager
+import com.github.ringoame196_s_mcPlugin.update.UpdateListener
+import com.github.ringoame196_s_mcPlugin.update.VersionManager
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitTask
@@ -15,6 +17,10 @@ class Main : JavaPlugin() {
 
     override fun onEnable() {
         super.onEnable()
+        saveDefaultConfig()
+
+        val versionUrl = "https://raw.githubusercontent.com/ringoame196-s-mcPlugin/ResurrectionOre/master/ver.txt"
+        setupUpdateChecker(versionUrl)
 
         // 設定ファイル読み込み
         saveResource("resurrection_time_data.yml", false)
@@ -42,5 +48,14 @@ class Main : JavaPlugin() {
         super.onDisable()
         RevivalDatabaseManager.flushToDatabase()
         if (::task.isInitialized) task.cancel()
+    }
+
+    private fun setupUpdateChecker(versionUrl: String) {
+        val notification = config.getBoolean("notification")
+        val versionManager = VersionManager(plugin, versionUrl, notification)
+        versionManager.checkAsync {
+            versionManager.sendConsoleMessage()
+        }
+        server.pluginManager.registerEvents(UpdateListener(versionManager), plugin)
     }
 }
