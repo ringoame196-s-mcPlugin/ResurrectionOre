@@ -63,7 +63,7 @@ tasks.named("build") {
     if (copyFile.exists() && copyFile.isDirectory) {
         doFirst {
             copy {
-                from(buildDir.resolve("libs/${project.name}.jar"))
+                from(buildDir.resolve("libs/${project.name}-$fullVersion.jar"))
                 into(copyFile)
             }
         }
